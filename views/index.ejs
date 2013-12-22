@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+     <script src="javascripts/lib/vendor/jquery.js"></script>
+
+    <!-- If you're sure your users will only be using browsers modern
+         enough to have their own JSON.parse and JSON.stringify
+         implementations you can skip this -->
+    <script src="javascripts/lib/vendor/json2.js"></script>
+
+    <!-- The main Annotator script -->
+    <script src="javascripts/pkg/annotator/annotator-full.min.js"></script>
+
+    <!-- Annotator's styling and images -->
+    <link rel="stylesheet" type="text/css" href="javascripts/pkg/annotator/annotator.min.css">
+
+    <!-- The following plugins are entirely optional -->
+
+    <!-- The Store plugin. Saves annotations to a remote backend -->
+    <script src="javascripts/pkg/annotator/annotator.store.min.js"></script>
+
+    <!-- The Auth plugin. Allows users of Annotator to authenticate themselves
+         to the remote backend -->
+    <script src="javascripts/pkg/annotator/annotator.auth.min.js"></script>
+
+    <!-- The Permissions plugin. See who created which annotation and create
+         annotations as a specified user -->
+    <script src="javascripts/pkg/annotator/annotator.permissions.min.js"></script>
+
+    <!-- The Tags plugin. Edit and display tag keywords on annotations -->
+    <script src="javascripts/pkg/annotator/annotator.tags.min.js"></script>
+
+    <!-- The Markdown plugin. Treat annotation text as Markdown -->
+    <script src="javascripts/lib/vendor/showdown.js"></script>
+    <script src="javascripts/pkg/annotator/annotator.markdown.min.js"></script>
+    <script src="javascripts/pkg/annotator/annotator.store.min.js"></script>
+  </head>
+  <body>
+  <div id="annotatorcontent">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p><em><%= content1 %></em></p>
+    <p><em><%= content2 %></em></p>
+    <p><em><%= content3 %></em></p>
+	<p><em>
+		<p>&nbsp;</p>
+		<ul>
+			<li>
+				Reader not launching content in Mac Safari (<a 	href="https://ciscople.atlassian.net/browse/PLE-4528">PLE-4528</a>)</li>
+			<li>
+				Some pages not pulling CSS style (<a href="https://ciscople.atlassian.net/browse/PLE-4526">PLE-4526</a>)</li>
+			<li>
+				Extra spaces not displaying in program code (<a href="https://ciscople.atlassian.net/browse/PLE-4527">PLE-4527</a>)</li>
+		</ul>
+	</em></p>
+	
+    </div>
+	<p><em>4. Item of Interest: Seamless Experience</em></p>
+    <div id="footer">
+ 
+<blockquote><p><em> <%= footercontent1 %> </em></p></blockquote>
+</div>
+    <script>
+      jQuery(function ($) {
+        if (typeof $.fn.annotator !== 'function') {
+          alert("Ooops! it looks like you haven't built the Annotator concatenation file. " +
+                "Either download a tagged release from GitHub, or modify the Cakefile to point " +
+                "at your copy of the YUI compressor and run `cake package`.");
+        } else {
+          // This is the important bit: how to create the annotator and add
+          // plugins
+          $('#annotatorcontent').annotator()
+                       .annotator('addPlugin', 'Markdown')
+                       .annotator('addPlugin', 'Tags')
+					   .annotator('addPlugin', 'Store', {
+							prefix: 'http://localhost:5000',
+							annotationData: {
+							        'uri': 'http://localhost:3000'
+							},
+					  		urls: {
+					    		create:  '/annotations',
+					    		read:    '/annotations/:id',
+					    		update:  '/annotations/:id',
+					    		destroy: '/annotations/:id',
+					    		search:  '/search'
+					  		}
+						})
+                       .annotator('addPlugin', 'Filter', {
+ 				 				filters: [ {
+					      			label: 'Quote',
+					      			property: 'quote'
+					    		}]
+						})
+
+        }
+      })
+        
+     
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00b7ff;
+}
+#framework-content-main .sitecopy p {
+  font-size: 11px;
+}
+.sitecopy p.expanded-spacing {
+  margin: 0 0 10px;
+}
+.sitecopy p {
+  color: #666;
+  display: block;
+  font-size: 11px;
+  margin: 0;
+}
+.sitecopy .item {
+  padding: 10px;
+}
+.sitecopy {
+  font-family: Arial, Helvetica, sans-serif;
+}
