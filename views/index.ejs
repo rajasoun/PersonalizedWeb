@@ -38,30 +38,26 @@
     <script src="javascripts/pkg/annotator/annotator.store.min.js"></script>
   </head>
   <body>
-  <div id="annotatorcontent">
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p><em><%= content1 %></em></p>
-    <p><em><%= content2 %></em></p>
-    <p><em><%= content3 %></em></p>
-	<p><em>
-		<p>&nbsp;</p>
-		<ul>
-			<li>
-				Reader not launching content in Mac Safari (<a 	href="https://ciscople.atlassian.net/browse/PLE-4528">PLE-4528</a>)</li>
-			<li>
-				Some pages not pulling CSS style (<a href="https://ciscople.atlassian.net/browse/PLE-4526">PLE-4526</a>)</li>
-			<li>
-				Extra spaces not displaying in program code (<a href="https://ciscople.atlassian.net/browse/PLE-4527">PLE-4527</a>)</li>
-		</ul>
-	</em></p>
-	
-    </div>
-	<p><em>4. Item of Interest: Seamless Experience</em></p>
-    <div id="footer">
  
-<blockquote><p><em> <%= footercontent1 %> </em></p></blockquote>
-</div>
+    <div id="annotatorcontent">
+      <h1><%= title %></h1>
+      <p>Welcome to <%= title %></p>
+      <p><em><%= content1 %></em></p>
+      <p><em><%= content2 %></em></p>
+      <p><em><%= content3 %></em></p>
+    		<ul>
+    			<li>
+    				Reader not launching content in Mac Safari (<a 	href="https://ciscople.atlassian.net/browse/PLE-4528">PLE-4528</a>)</li>
+    			<li>
+    				Some pages not pulling CSS style (<a href="https://ciscople.atlassian.net/browse/PLE-4526">PLE-4526</a>)</li>
+    			<li>
+    				Extra spaces not displaying in program code (<a href="https://ciscople.atlassian.net/browse/PLE-4527">PLE-4527</a>)</li>
+    		</ul>
+      <p><em>4. Item of Interest: Seamless Experience</em></p>
+    </div>  
+  <div id="footer">
+    <blockquote><p><em> <%= footercontent1 %> </em></p></blockquote>
+  </div>
     <script>
       jQuery(function ($) {
         if (typeof $.fn.annotator !== 'function') {
@@ -72,25 +68,25 @@
           // This is the important bit: how to create the annotator and add
           // plugins
           $('#annotatorcontent').annotator()
-                       .annotator('addPlugin', 'Markdown')
-                       .annotator('addPlugin', 'Tags')
+             .annotator('addPlugin', 'Markdown')
+             .annotator('addPlugin', 'Tags')
 					   .annotator('addPlugin', 'Store', {
-							prefix: 'http://localhost:5000',
-							annotationData: {
-							        'uri': 'http://localhost:3000'
-							},
-					  		urls: {
-					    		create:  '/annotations',
-					    		read:    '/annotations/:id',
-					    		update:  '/annotations/:id',
-					    		destroy: '/annotations/:id',
-					    		search:  '/search'
-					  		}
-						})
-                       .annotator('addPlugin', 'Filter', {
+        							prefix: 'http://localhost:5000',
+        							annotationData: {
+        							        'uri': 'http://localhost:3000'
+        							},
+        					  		urls: {
+        					    		create:  '/annotations',
+        					    		read:    '/annotations/:id',
+        					    		update:  '/annotations/:id',
+        					    		destroy: '/annotations/:id',
+        					    		search:  '/search'
+        					  		}
+        						})
+             .annotator('addPlugin', 'Filter', {
  				 				filters: [ {
-					      			label: 'Quote',
-					      			property: 'quote'
+					      			label: 'Tags',
+					      			property: 'tags'
 					    		}]
 						})
 
