@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <style type="text/css">
+            table, th, td {
+                border: 1px solid black;
+                border-collapse:collapse;
+            }
+            td { padding:15px;}
+
+        </style>
+    </head>
+    <body>
+        <div id="filters">
+            <span class='heading'>Filters</span>
+        </div>
+        <div id="annotations">
+            <span class='heading'>Annotations</span>
+            <table id="annList">
+                <tr>
+                    <th>URL</th>
+                    <th>Comment</th>
+                    <th>Quote</th>
+                </tr>
+            </table>
+        </div>
+        <script>
+            <!--@NOTE: Service EndPoint -->
+            $.getJSON("http://127.0.0.1:5000/annotations",
+              {
+                format: "json"
+              },
+              function(data) {
+                  for (var i=0; i < data.length; i++){
+                      if (!data[i].reply){
+                          $('#annList').append(("<tr><td><a href='"+
+                                                data[i].uri + "'>" +
+                                                data[i].uri+"</a></td><td>"+
+                                                data[i].text + "</td><td>"+ data[i].quote + "</td></tr>"));
+                          };
+                  }
+              });
+        </script>
+    </body>
+</html>
